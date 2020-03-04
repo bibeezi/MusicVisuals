@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Name: Bianca Palileo
 
-Student Number: 
+Student Number: C18326906
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
