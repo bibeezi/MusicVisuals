@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Yolk",
+            "request": "launch",
+            "mainClass": "c18326906.Yolk",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "ie.tudublin.Main",
