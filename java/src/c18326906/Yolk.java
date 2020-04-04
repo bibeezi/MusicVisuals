@@ -5,13 +5,14 @@ import java.util.Random;
 
 public class Yolk extends Visual
 {
+    int boundary = 1000;
+    Raindrop[] rain = new Raindrop[boundary];
+
     public void settings()
     {
-        size(800, 800);
+        size(1000, 1000);
         //fullScreen();
     }
-
-    boolean spiral = false;
 
     public void keyPressed()
     {
@@ -20,13 +21,7 @@ public class Yolk extends Visual
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
         }
-        // if (key == '1')
-        // {
-        //     spiral = ! spiral;
-        // }
     }
-
-    Raindrop[] rain = new Raindrop[100];
 
     public void setup()
     {
@@ -42,23 +37,35 @@ public class Yolk extends Visual
         }
     }
 
-    public int RandomNumber()
+    public float RandomNumber()
     {
         Random rand = new Random();
-        return rand.nextInt(width);
+        return rand.nextInt(boundary);
+    }
+
+    public void display(float x, float y1, float y2)
+    {
+        colorMode(HSB);
+        stroke(x % 255, 255, 255);
+        line(x, y1, x, y2);
+        
+        for(int i = 0; i < rain.length; i++)
+        {
+            rain[i].update();
+        }
     }
 
     public void draw()
     {
         background(0);
-        colorMode(HSB);
 
         calculateAverageAmplitude();
 
-        for(int i = 0; i < rain.length - 1; i++)
+        println(ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 1, 1000 )));
+
+        for(int i = 0; i < ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 1, 1000 )); i++)
         {
-            rain[i].update();
-            rain[i].display();
+            display(rain[i].x, rain[i].y1, rain[i].y2);
         }
-	}
+    }
 }
