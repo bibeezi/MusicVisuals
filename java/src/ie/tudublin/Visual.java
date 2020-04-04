@@ -21,7 +21,7 @@ public abstract class Visual extends PApplet
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;
 
-	
+	public float frameToSecond = sampleRate / (float) frameSize;
 	
 	public void startMinim() 
 	{
@@ -77,6 +77,20 @@ public abstract class Visual extends PApplet
 			bands[i] = average * 5.0f;
 			smoothedBands[i] = lerp(smoothedBands[i], bands[i], 0.05f);
 		}
+	}
+
+	public int calculateZeroCrossings()
+	{
+		int count = 0;
+
+		for(int i = 1 ; i < ap.bufferSize() ; i ++)
+		{
+			if (ap.left.get(i-1) > 0 && ap.left.get(i) <= 0)
+			{
+				count ++;
+			}
+		}
+		return count;
 	}
 
 	public void startListening()
