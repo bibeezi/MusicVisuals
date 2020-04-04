@@ -6,6 +6,7 @@ import java.util.Random;
 public class Yolk extends Visual
 {
     int boundary = 1000;
+
     Raindrop[] rain = new Raindrop[boundary];
 
     public void settings()
@@ -40,7 +41,7 @@ public class Yolk extends Visual
     public float RandomNumber()
     {
         Random rand = new Random();
-        return rand.nextInt(boundary);
+        return rand.nextInt(width);
     }
 
     public void display(float x, float y1, float y2)
@@ -57,7 +58,7 @@ public class Yolk extends Visual
 
         //noStroke();
         fill(0, 0, 0);
-        ellipse(500, boundary, 300, 500);
+        ellipse(width / 2, height, 300, 500);
     }
 
     public void draw()
@@ -66,7 +67,9 @@ public class Yolk extends Visual
 
         calculateAverageAmplitude();
 
-        for(int i = 0; i < ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 0, 250)); i++)
+        int rainAmount = ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 0, 250));
+
+        for(int i = 0; i < rainAmount; i++)
         {
             display(rain[i].x, rain[i].y1, rain[i].y2);
         }
