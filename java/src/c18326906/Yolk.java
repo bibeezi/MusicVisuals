@@ -46,13 +46,18 @@ public class Yolk extends Visual
     public void display(float x, float y1, float y2)
     {
         colorMode(HSB);
-        stroke(x % 255, 255, 255);
+        float colour = map(RandomNumber(), 1, 1000, 0, 255);
+        stroke(colour, 255, 255);
         line(x, y1, x, y2);
         
         for(int i = 0; i < rain.length; i++)
         {
             rain[i].update();
         }
+
+        //noStroke();
+        fill(0, 0, 0);
+        ellipse(500, boundary, 300, 500);
     }
 
     public void draw()
@@ -61,9 +66,7 @@ public class Yolk extends Visual
 
         calculateAverageAmplitude();
 
-        println(ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 1, 1000 )));
-
-        for(int i = 0; i < ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 1, 1000 )); i++)
+        for(int i = 0; i < ceil(map(getSmoothedAmplitude() * 1000, 0, 250, 0, 250)); i++)
         {
             display(rain[i].x, rain[i].y1, rain[i].y2);
         }

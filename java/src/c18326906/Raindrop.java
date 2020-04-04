@@ -15,12 +15,12 @@ class Raindrop extends Yolk
 
     void update()
     {
-        y1++;
-        y2++;
+        y1 += 0.1;
+        y2 += 0.1;
 
-        if(y2 > height)
+        if(y2 > boundary)
         {
-            y1 = RandomNumber();
+            y1 = 0;
             y2 = y1 + 40;
         }
     }
