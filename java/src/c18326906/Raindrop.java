@@ -19,7 +19,7 @@ class Raindrop extends Yolk
         y1++;
         y2++;
 
-        if(y2 > boundary)
+        if(y2 > height)
         {
             y1 = 0;
             y2 = y1 + rainlength;
