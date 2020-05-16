@@ -9,8 +9,10 @@ public class Sideways
     float cubeX, cubeY;
     float angle;
     float size;
+
     Boolean switchX = true;
     Boolean switchY = true;
+    
     int count;
 
     public Sideways(Yolk egg)
