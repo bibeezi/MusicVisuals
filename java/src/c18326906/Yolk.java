@@ -43,6 +43,8 @@ public class Yolk extends Visual
 
     public void draw()
     {
+        background(0);
+        
         calculateAverageAmplitude();
 
         int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 30, 0, limit));
