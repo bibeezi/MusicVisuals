@@ -1,6 +1,7 @@
 package c18326906;
 
 import processing.core.*;
+import java.util.Random; 
 
 public class Raindrop
 {
@@ -15,8 +16,8 @@ public class Raindrop
     {
         this.egg = egg; 
 
-        x = egg.RandomNumber();
-        y1 = egg.RandomNumber();
+        x = RandomNumber();
+        y1 = RandomNumber();
         y2 = y1 + rainlength;
     }
 
@@ -25,7 +26,7 @@ public class Raindrop
         y1++;
         y2++;
 
-        if(y2 > egg.height)
+        if(y1 > egg.height)
         {
             y1 = 0;
             y2 = y1 + rainlength;
@@ -34,13 +35,15 @@ public class Raindrop
 
     public void display()
     {
-        float colour = PApplet.map(egg.RandomNumber(), 0, 1000, 0, 255);
+        float colour = PApplet.map(RandomNumber(), 0, 1000, 0, 255);
 
         egg.stroke(colour, 255, 255);
         egg.line(x, y1, x, y2);
+    }
 
-        egg.noStroke();
-        egg.fill(0, 0, 0);
-        egg.ellipse(egg.width / 2, egg.height, 300, 500);
+    public int RandomNumber()
+    {
+        Random rand = new Random();
+        return rand.nextInt(egg.width);
     }
 }

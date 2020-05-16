@@ -1,17 +1,21 @@
 package c18326906;
 
 import ie.tudublin.Visual;
-import java.util.Random; 
+import ie.tudublin.VisualException;
 
 public class Yolk extends Visual
-{   
+{
     int limit = 1000;
-    
     Raindrop[] rain = new Raindrop[limit];
 
+    Sideways s = new Sideways(this);
+    float[] bands;
+
+    float max = 0;
+    
     public void settings()
     {
-        size(1000, 1000);
+        size(1000, 1000, P3D);
         //fullScreen();
     }
 
@@ -19,7 +23,7 @@ public class Yolk extends Visual
     {
         //if (key == ' ')
         //{
-            getAudioPlayer().cue(0);
+            // getAudioPlayer().cue(0);
             getAudioPlayer().play();
         //}
     }
@@ -29,36 +33,48 @@ public class Yolk extends Visual
         noCursor();
         setFrameSize(256);
         startMinim();
-        //loadAudio("BassnectarBassHead.mp3");
-        loadAudio("KidCudiCreepers.mp3");
-
-        background(0);
         colorMode(HSB);
 
-        for(int i = 0; i < rain.length; i++)
+        loadAudio("Dancin.mp3");
+        //loadAudio("KidCudiCreepers.mp3");
+
+        for(int i = 0; i < limit; i++)
         {
             rain[i] = new Raindrop(this);
         }
+        
     }
 
     public void draw()
-    {
+    {   
         background(0);
         
         calculateAverageAmplitude();
+        try
+        {
+            calculateFFT();
+        }
+        catch(VisualException e)
+        {
+            e.printStackTrace();
+        }
+        calculateFrequencyBands();
 
-        int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 30, 0, limit));
+        while(max < getSmoothedAmplitude() * 100)
+        {
+            max = getSmoothedAmplitude() * 100;
+            println(max);
+        }
+        
+        int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 50, 0, limit));
 
-        for(int i = 0; i < rainAmount; i++)
+        for(int i = 1; i < rainAmount; i++)
         {
             rain[i].display();
             rain[i].update();
         }
-    }
 
-    public int RandomNumber()
-    {
-        Random rand = new Random();
-        return rand.nextInt(width);
+        bands = getSmoothedBands();
+        s.display();
     }
 }
