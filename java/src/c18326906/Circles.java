@@ -42,7 +42,7 @@ public class Circles
         r += egg.getSmoothedAmplitude();
         theta += egg.getSmoothedAmplitude() / 2;
 
-        if(x > egg.width / 2)
+        if(x > egg.width / 3)
         {
             x = 0;
             y = 0;

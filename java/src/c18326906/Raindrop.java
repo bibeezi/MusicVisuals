@@ -10,6 +10,7 @@ public class Raindrop
     float x;
     float y1;
     float y2;
+    float colour;
     int rainlength = 80;
 
     public Raindrop(Yolk egg)
@@ -23,8 +24,8 @@ public class Raindrop
 
     public void update()
     {
-        y1++;
-        y2++;
+        y1 += 9;
+        y2 += 9;
 
         if(y1 > egg.height)
         {
@@ -35,7 +36,7 @@ public class Raindrop
 
     public void display()
     {
-        float colour = PApplet.map(RandomNumber(), 0, 1000, 0, 255);
+        colour = PApplet.map(RandomNumber(), 0, egg.width, 0, 255);
 
         egg.stroke(colour, 150, 255);
         egg.strokeWeight(2);

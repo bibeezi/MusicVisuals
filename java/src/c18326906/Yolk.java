@@ -6,6 +6,7 @@ import ie.tudublin.VisualException;
 public class Yolk extends Visual
 {
     private int limit = 500;
+    private int rainAmount;
     private Raindrop[] r = new Raindrop[limit];
 
     private Sideways s = new Sideways(this);
@@ -13,7 +14,7 @@ public class Yolk extends Visual
 
     private Circles c = new Circles(this);
 
-    private Boolean rain, square, circle;
+    private Boolean rain, square, circle, background;
     
     public void settings()
     {
@@ -39,6 +40,10 @@ public class Yolk extends Visual
         {
             circle = !circle;
         }
+        if(key == 'b')
+        {
+            background = !background;
+        }
     }
 
     public void setup()
@@ -53,17 +58,28 @@ public class Yolk extends Visual
             r[i] = new Raindrop(this);
         }
 
-        rain = square = circle = true;
+        rain = background = true;
+        square = circle = false;
         
+        background(0);
+
         loadAudio("Dancin.mp3");
+        //loadAudio("Astronomia");
         getAudioPlayer().play();
     }
 
     public void draw()
     {   
-        background(0);
-        
+        if(background == true)
+        {
+            background(0);
+        }
+        else
+        {
+            background(getSmoothedAmplitude() * 100);
+        }
 
+        
         calculateAverageAmplitude();
         try
         {
@@ -78,7 +94,7 @@ public class Yolk extends Visual
 
         if(rain == true)
         {
-            int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
+            rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
 
             for(int i = 1; i < rainAmount; i++)
             {

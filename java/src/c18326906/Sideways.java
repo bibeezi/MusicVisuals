@@ -13,7 +13,7 @@ public class Sideways
     Boolean switchX = true;
     Boolean switchY = true;
     
-    int count;
+    int count, speed;
     float colour;
 
     public Sideways(Yolk egg)
@@ -24,6 +24,7 @@ public class Sideways
         cubeX = 0;
         cubeY = 0;
         count = 0;
+        speed = 5;
     }
 
     public void display()
@@ -32,7 +33,7 @@ public class Sideways
         {
             egg.stroke(0);
             egg.strokeWeight(5);
-            if(count < 7 && egg.frameCount % 20 == 0)
+            if(count < 7 && egg.frameCount % 10 == 0)
             {
                 colour = PApplet.map(egg.bands[count], 0, egg.bands.length, 0, 255);
             }
@@ -67,7 +68,7 @@ public class Sideways
             switchY = !switchY;
         }
 
-        cubeX = (switchX == true) ? cubeX + 5 : cubeX - 5;
-        cubeY = (switchY == true) ? cubeY + 5 : cubeY - 5;
+        cubeX = (switchX == true) ? cubeX + speed : cubeX - speed;
+        cubeY = (switchY == true) ? cubeY + speed : cubeY - speed;
     }
 }
