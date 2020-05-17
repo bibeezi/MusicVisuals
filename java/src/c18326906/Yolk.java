@@ -63,8 +63,8 @@ public class Yolk extends Visual
         
         background(0);
 
-        loadAudio("Dancin.mp3");
-        //loadAudio("Astronomia");
+        //loadAudio("Dancin.mp3");
+        loadAudio("Astronomia.mp3");
         getAudioPlayer().play();
     }
 

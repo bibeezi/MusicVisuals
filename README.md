@@ -1,11 +1,12 @@
 # Music Visualiser Project
 
-*Name:* Bianca Palileo
-*Student Number:* C18326906
+Name: Bianca Palileo
+
+Student Number: C18326906
 
 # Description of the assignment
 For this assignment, I had to create "Something beautiful to listen to music".
-The assignment is created by using *Java* code and its *processing* library.
+The assignment is created by using Java code and its processing library.
 
 I created 4 Effects:
 - Strobelight
@@ -19,15 +20,15 @@ All visual effects react to music in their own way whether it is the frequency o
 When compiled, the music and visual effects start.
 
 You can turn the effects on and off by pressing:
-1. b - strobelights
-2. 1 - rainfall
-3. 2 - cubes
-4. 3 - circles
+b - strobelights
+1 - rainfall
+2 - cubes
+3 - circles
 
 Pressing space restarts the song.
 
 ## Youtube Video
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](mq2.jpg)](https://youtu.be/42WdSz8p6DY)
 
 # How it works
 Yolk is the subclass of the Visual class. It calls methods from the other three classes; Raindrop, Sideways and Circles.
@@ -41,14 +42,14 @@ Then the three classes with visual effects have the Yolk class passed into them 
 For example:
 ```Java
 	public Sideways(Yolk egg)
-		{
-			this.egg = egg;
-		}
+	{
+		this.egg = egg;
+	}
 
 	public void display()
-		{
-			egg.stroke(0);
-		}
+	{
+		egg.stroke(0);
+	}
 ```
 
 Yolk will then call the method for these classes to display the visual effect.
@@ -64,7 +65,7 @@ The strobelights work by changing the background colour to something lighter whe
 
 This creates an effect where lights appear to the beat of the song.
 
-## Rainfall - 
+## Rainfall - Raindrop.java
 For rainfall, I created a random number generator that chooses a number between 0 and the width. 
 ```Java
     public int RandomNumber()
@@ -195,4 +196,5 @@ The best part of working on this assignment was getting the objects to respond t
 
 # Songs Used
 [hyperlink]https://soundcloud.com/kronopage/aaron-smith-dancin-remix-by
+
 [hyperlink]https://www.youtube.com/watch?v=iLBBRuVDOo4
