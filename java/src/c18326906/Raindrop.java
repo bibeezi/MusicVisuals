@@ -10,7 +10,7 @@ public class Raindrop
     float x;
     float y1;
     float y2;
-    int rainlength = 60;
+    int rainlength = 80;
 
     public Raindrop(Yolk egg)
     {
@@ -37,7 +37,8 @@ public class Raindrop
     {
         float colour = PApplet.map(RandomNumber(), 0, 1000, 0, 255);
 
-        egg.stroke(colour, 255, 255);
+        egg.stroke(colour, 150, 255);
+        egg.strokeWeight(2);
         egg.line(x, y1, x, y2);
     }
 

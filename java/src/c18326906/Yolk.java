@@ -5,17 +5,28 @@ import ie.tudublin.VisualException;
 
 public class Yolk extends Visual
 {
-    int limit = 500;
-    Raindrop[] rain = new Raindrop[limit];
+    private int limit = 500;
+    private Raindrop[] rain = new Raindrop[limit];
 
-    Sideways s = new Sideways(this);
-    float[] bands;
+    private Sideways s = new Sideways(this);
+    public float[] bands;
 
-    float max = 0;
+    private Circles c = new Circles(this);
+    
+    private Wave w = new Wave(this);
     
     public void settings()
     {
         fullScreen(P3D);
+    }
+
+    public void keyPressed()
+    {
+        if(key == ' ')
+        {
+            getAudioPlayer().cue(0);
+            getAudioPlayer().play();
+        }
     }
 
     public void setup()
@@ -25,15 +36,14 @@ public class Yolk extends Visual
         startMinim();
         colorMode(HSB);
 
-        loadAudio("Dancin.mp3");
-        //loadAudio("KidCudiCreepers.mp3");
-        getAudioPlayer().play();
-
         for(int i = 0; i < limit; i++)
         {
             rain[i] = new Raindrop(this);
         }
         
+        background(0);
+        loadAudio("Dancin.mp3");
+        getAudioPlayer().play();
     }
 
     public void draw()
@@ -52,32 +62,18 @@ public class Yolk extends Visual
         calculateFrequencyBands();
         
 
-        // int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
-        // for(int i = 1; i < rainAmount; i++)
-        // {
-        //     rain[i].display();
-        //     rain[i].update();
-        // }
+        int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
+        for(int i = 1; i < rainAmount; i++)
+        {
+            rain[i].display();
+            rain[i].update();
+        }
 
 
-        // bands = getSmoothedBands();
-        // s.display();
+        bands = getSmoothedBands();
+        s.display();
 
-        x = r * cos(theta);
-        y = r * sin(theta);
-        x1 = r * -cos(theta);
-        y1 = r * -sin(theta);
-
-        translate(width / 2, height / 2);
-
-        stroke(255, 255, 255);
-
-        ellipse(x, y, 10, 10);
-        ellipse(x1, y1, 10, 10);
-
-        r += 0.1;
-        theta += 0.02;
+        
+        c.display();
     }
-
-    float x, y, r, theta, x1, y1;
 }

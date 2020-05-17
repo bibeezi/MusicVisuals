@@ -1,6 +1,5 @@
 package ie.tudublin;
 
-// import example.MyVisual;
 import c18326906.Yolk;
 
 public class Main
