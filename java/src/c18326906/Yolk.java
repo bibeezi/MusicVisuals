@@ -6,14 +6,14 @@ import ie.tudublin.VisualException;
 public class Yolk extends Visual
 {
     private int limit = 500;
-    private Raindrop[] rain = new Raindrop[limit];
+    private Raindrop[] r = new Raindrop[limit];
 
     private Sideways s = new Sideways(this);
     public float[] bands;
 
     private Circles c = new Circles(this);
-    
-    private Wave w = new Wave(this);
+
+    private Boolean rain, square, circle;
     
     public void settings()
     {
@@ -27,6 +27,18 @@ public class Yolk extends Visual
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
         }
+        if(key == '1')
+        {
+            rain = !rain;
+        }
+        if(key == '2')
+        {
+            square = !square;
+        }
+        if(key == '3')
+        {
+            circle = !circle;
+        }
     }
 
     public void setup()
@@ -38,10 +50,11 @@ public class Yolk extends Visual
 
         for(int i = 0; i < limit; i++)
         {
-            rain[i] = new Raindrop(this);
+            r[i] = new Raindrop(this);
         }
+
+        rain = square = circle = true;
         
-        background(0);
         loadAudio("Dancin.mp3");
         getAudioPlayer().play();
     }
@@ -50,6 +63,7 @@ public class Yolk extends Visual
     {   
         background(0);
         
+
         calculateAverageAmplitude();
         try
         {
@@ -62,18 +76,29 @@ public class Yolk extends Visual
         calculateFrequencyBands();
         
 
-        int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
-        for(int i = 1; i < rainAmount; i++)
+        if(rain == true)
         {
-            rain[i].display();
-            rain[i].update();
+            int rainAmount = ceil(map(getSmoothedAmplitude() * 100, 0, 100, 0, limit));
+
+            for(int i = 1; i < rainAmount; i++)
+            {
+                r[i].display();
+                r[i].update();
+            }
         }
-
-
-        bands = getSmoothedBands();
-        s.display();
-
         
-        c.display();
+
+        if(square == true)
+        {
+            bands = getSmoothedBands();
+            s.display();
+        }
+        
+
+        if(circle == true)
+        {
+            c.display();
+        }
+        
     }
 }

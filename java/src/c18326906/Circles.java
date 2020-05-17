@@ -38,8 +38,8 @@ public class Circles
             egg.ellipse(x * (i * 0.8f), y * (i * 0.8f), size - (i * 10), size - (i * 10));
             egg.ellipse(x1 * (i * 0.8f), y1 * (i * 0.8f), size - (i * 10), size - (i * 10));
         }
-
-        r += 0.1f;
+       
+        r += egg.getSmoothedAmplitude();
         theta += egg.getSmoothedAmplitude() / 2;
 
         if(x > egg.width / 2)
